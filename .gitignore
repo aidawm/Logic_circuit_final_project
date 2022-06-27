@@ -1,0 +1,14 @@
+*.gise
+*.xise
+*.html
+_xmsgs/
+iseconfig/
+ipcore_dir/
+isim/
+*.exe
+*.log
+*.wdb
+*.prj
+*.xmsgs
+*.cmd
+*.ini
