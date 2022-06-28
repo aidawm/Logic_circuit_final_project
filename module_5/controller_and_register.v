@@ -28,8 +28,8 @@ wire enableP , enableQ;
 
 controller ctrl(clock,request,confirm,inputData,enableP,enableQ);
 
-register r_p (clock,inputData[1:7],enableP,dataP);
-register r_p (clock,inputData[1:7],enableQ,dataQ);
+register r_p (clock,inputData[7:1],enableP,dataP);
+register r_q (clock,inputData[7:1],enableQ,dataQ);
 
 
 endmodule

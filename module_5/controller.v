@@ -27,8 +27,8 @@ output reg regP ,
 output reg regQ 
     );
 
-wire [3:0] password;
-assign password = 4'b0101;
+wire [7:0] password;
+assign password = 8'b0000011;
 
 parameter 
 A = 3'b000,
@@ -42,11 +42,13 @@ reg [2:0]next_state;
 
 initial
 	begin
-		present_state=S0;
-		next_state=S0;
+		present_state=A;
+		next_state=A;
 	end
 		
-
+initial
+      $monitor("request=%b confirm = %b , user = %b,password=%b,  present_state= %b next_state= %b regP= %b,reqQ= %b user[7]=%b time = %0d", 
+               request, confirm , user ,password,present_state,next_state,regP,regQ,user[7], $time);
 always @ (posedge clock or negedge request)
 		if(~request) present_state=A;
 		else present_state=next_state;
@@ -79,7 +81,7 @@ always @ (request or confirm or user)
 			
 		endcase
 		
-always @ (present_state)
+always @ (posedge clock)///in D state can be change again?present state
 		case (present_state)
 			A: 
 				begin  
@@ -110,11 +112,11 @@ always @ (present_state)
 				if(~request)
 					begin
 						regP=1'b0 ;  
-					regQ=1'b0 ;
+						regQ=1'b0 ;
 					end
 				else
 					begin
-						if (pass_data[0] == 1'b1) 
+						if (user[7] == 1'b0) 
 							begin 
 								regP=1'b1 ;  
 								regQ=1'b0 ;

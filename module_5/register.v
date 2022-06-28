@@ -33,7 +33,9 @@ initial
 always @ (posedge clock )
 	begin
 		if(enable)
-			qout = qin;
+			dout = din;
+		else 
+			dout = 7'b0000000;
 	end	
 	
 endmodule
