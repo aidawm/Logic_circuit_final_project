@@ -15,29 +15,37 @@
 --*/
 
 /*-----------------------------------------------------------
----  Module Name: bmi
+---  Module Name: bfp
 -----------------------------------------------------------*/
-`include "../module_1/multiplier8x8.v"
 `timescale 1 ns/1 ns
-module bmi(
- enable,
- weight,
-height,
-category);
+module bfp(
+wf,
+hf,
+af,
+wm,
+hm,
+am,
+s,
+bfprange);
+  input [7:0] wf;
+  input [7:0] hf;
+  input [7:0] af;
+  input [7:0] wm;
+  input [7:0] hm;
+  input [7:0] am;
+  input s;
+  output reg [7:0] range;
 
-input enable;
-input [7:0] height; 
-input [7:0] weight;
-output reg [7:0]category;
-wire [15:0] height_power_2;
+wire [7:0] femaleRange ;
+wire [7:0] maleRange;
+wire [7:0] muxResult;
+bfpfemale female(wf,hf,af,femaleRange);
+bfpmale male(wm,hm,am,maleRange);
 
-multiplier8x8 m1(height, height, height_power_2);
+multiplexer2x1 mux(frmaleRange,maleRange,s,muxResult);
 
-always @( enable, weight, height_power_2)
-	begin
-		if(enable)
-			assign category = weight / height_power_2;
-		else
-			category =8'b00000000;
-	end
+always @ (muxResult)
+	range = muxResult; 
+	
+	
 endmodule

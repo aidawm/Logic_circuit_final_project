@@ -15,29 +15,29 @@
 --*/
 
 /*-----------------------------------------------------------
----  Module Name: bmi
+---  Module Name: bfpmale
 -----------------------------------------------------------*/
-`include "../module_1/multiplier8x8.v"
+
+`include "../module_1/bmi.v"
+
 `timescale 1 ns/1 ns
-module bmi(
- enable,
- weight,
-height,
-category);
+module bfpmale(
+wm,
+hm,
+am,
+bfprange);
+  input [7:0] wm;
+  input [7:0] hm;
+  input [7:0] am;
+  output [7:0] rangem;
+reg [23:0] result;
+parameter twelve= 8'b00001100 , twenty_three = 8'b00010111, hundred = 8'b01100100 , ten=8'b00001010 , fifty_four = 8'b00110110;
+bmi calcBmi(1'b1,wm,hm,bmi);
 
-input enable;
-input [7:0] height; 
-input [7:0] weight;
-output reg [7:0]category;
-wire [15:0] height_power_2;
-
-multiplier8x8 m1(height, height, height_power_2);
-
-always @( enable, weight, height_power_2)
+always @ (af,bmi)
 	begin
-		if(enable)
-			assign category = weight / height_power_2;
-		else
-			category =8'b00000000;
+		assign result = ((twelve*bmi*ten)+(twenty_three*af)-(hundred_sixty_two*ten))/hundred;
 	end
+
+assign bfprange = result;
 endmodule
