@@ -29,25 +29,27 @@ module tb_bmi;
 	reg [7:0] weight;
 	reg [7:0] height;
 	wire [7:0]category;
+	wire [23:0] result;
 
 	// Instantiate the Unit Under Test (UUT)
 	bmi uut (
 		.enable(enable), 
 		.weight(weight), 
 		.height(height),
-		.category(category)
+		.category(category),
+		.result(result)
 	);
 
 	initial begin
-		enable <= 1'b0;
-		weight <= 8'b01010000; // 80
-		height <= 8'b00000010; // 2 
-		#100;
-      
 		enable <= 1'b1;
+		weight <= 8'b01010000; // 80
+		height <= 8'b10101010; // 2 
+		#500;
+      
+		/*enable <= 1'b1;
 		#100;
 		enable <= 1'b0;
-		#100;
+		#100;*/
 		$finish;
 
 	end
