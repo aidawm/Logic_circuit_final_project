@@ -23,11 +23,22 @@ module bmi_module(
  height,
  overweight,
  normal,
- underweight);
+ underweight,
+ error);
 input [7:0] height;
-input [7:0] weight;
+input [8:0] weight;
 output overweight;
 output normal;
 output underweight;
- // write your code here, please.
+output error;
+
+wire error_not;
+wire [7:0]category;
+
+parityErrorChecker PECh (weight,error);
+not n( error_not,error);
+bmi b(error_not,weight[7:0],height,category);
+
+comparator comp (category,overweight,normal,underweight);
+
 endmodule

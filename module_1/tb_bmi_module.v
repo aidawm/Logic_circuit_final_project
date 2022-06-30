@@ -4,15 +4,15 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   19:44:55 06/27/2022
-// Design Name:   parityErrorChecker
-// Module Name:   C:/Users/Orjance Computer/Desktop/logic_final_project/module_1/tb_parityErrorChecker.v
+// Create Date:   00:31:25 07/01/2022
+// Design Name:   bmi_module
+// Module Name:   C:/Users/Orjance Computer/Desktop/logic_final_project/module_1/tb_bmi_module.v
 // Project Name:  module_1
 // Target Device:  
 // Tool versions:  
 // Description: 
 //
-// Verilog Test Fixture created by ISE for module: parityErrorChecker
+// Verilog Test Fixture created by ISE for module: bmi_module
 //
 // Dependencies:
 // 
@@ -22,31 +22,42 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-module tb_parityErrorChecker;
+module tb_bmi_module;
 
 	// Inputs
-	reg [8:0] data;
+	reg [8:0] weight;
+	reg [7:0] height;
 
 	// Outputs
+	wire overweight;
+	wire normal;
+	wire underweight;
 	wire error;
 
 	// Instantiate the Unit Under Test (UUT)
-	parityErrorChecker uut (
-		.data(data), 
+	bmi_module uut (
+		.weight(weight), 
+		.height(height), 
+		.overweight(overweight), 
+		.normal(normal), 
+		.underweight(underweight),
 		.error(error)
 	);
 
 	initial begin
 		// Initialize Inputs
-		data = 9'b100110101;
-		$display ("%b",data[8]);
+		weight = 9'b101010000;
+		height = 8'b10101010;
+
 		// Wait 100 ns for global reset to finish
 		#100;
 		
-		data = 9'b100110111;
-      
+		weight = 9'b001010000;
+		height = 8'b10101010;
+
 		#100;
 		$finish;
+        
 		// Add stimulus here
 
 	end

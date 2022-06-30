@@ -38,7 +38,14 @@ comparator_8bit c25(category,twenty_five,less_25,equal_25,great_25);
 
 
 always @ (eighteen,less_18,equal_18,great_18,category,twenty_five,less_25,equal_25,great_25)
-	if(less_18 | equal_18)
+	if(category ==0)
+		begin
+			overweight = 1'b0;
+			normal =1'b0;
+			underweight=1'b0;
+		end
+		
+	else if(less_18 | equal_18)
 		begin 
 			overweight = 1'b0;
 			normal =1'b0;

@@ -23,8 +23,7 @@ module bmi(
  enable,
  weight,
 height,
-category,
-result);
+category);
 
 input enable;
 input [7:0] height; 
@@ -32,7 +31,7 @@ input [7:0] weight;
 output reg [7:0]category;
 wire [15:0] height_power_2;
 wire [15:0] hundred_power_2;
-output [23:0] result;
+wire [23:0] result;
 reg [23:0] result2;
 parameter hundred = 8'b01100100;
 
@@ -43,7 +42,6 @@ multiplier16x8 m2(hundred, weight, result);
 
 always @( enable , height_power_2 , result)
 	begin
-	
 		if(enable)
 			begin
 				result2 = result/height_power_2;
@@ -51,6 +49,8 @@ always @( enable , height_power_2 , result)
 			end
 			
 		else
-			category =8'b00000000;
+			begin
+				assign category =8'b00000000;
+			end
 	end
 endmodule
