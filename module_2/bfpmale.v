@@ -29,14 +29,19 @@ bfprange);
   input [7:0] wm;
   input [7:0] hm;
   input [7:0] am;
-  output [7:0] rangem;
+  output[7:0] bfprange;
 reg [23:0] result;
+wire [7:0] bmi;
 parameter twelve= 8'b00001100 , twenty_three = 8'b00010111, hundred = 8'b01100100 , ten=8'b00001010 , fifty_four = 8'b00110110;
 bmi calcBmi(1'b1,wm,hm,bmi);
 
-always @ (af,bmi)
+initial 
+	begin 
+		$monitor ("bmi = %b ,result = %b",bmi,result);
+	end
+always @ (am,bmi)
 	begin
-		assign result = ((twelve*bmi*ten)+(twenty_three*af)-(hundred_sixty_two*ten))/hundred;
+		assign result = ((twelve*bmi*ten)+(twenty_three*am)-(fifty_four*ten))/hundred;
 	end
 
 assign bfprange = result;

@@ -34,7 +34,7 @@ bfprange);
   input [7:0] hm;
   input [7:0] am;
   input s;
-  output reg [7:0] range;
+  output reg [7:0] bfprange;
 
 wire [7:0] femaleRange ;
 wire [7:0] maleRange;
@@ -42,10 +42,14 @@ wire [7:0] muxResult;
 bfpfemale female(wf,hf,af,femaleRange);
 bfpmale male(wm,hm,am,maleRange);
 
-multiplexer2x1 mux(frmaleRange,maleRange,s,muxResult);
+/*initial 
+	begin 
+		$monitor ("%male = %b , female = %b",bfprange,femaleRange);
+	end*/
+multiplexer2x1 mux(femaleRange,maleRange,s,muxResult);
 
 always @ (muxResult)
-	range = muxResult; 
+	bfprange = muxResult; 
 	
 	
 endmodule

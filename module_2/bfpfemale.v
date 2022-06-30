@@ -18,6 +18,7 @@
 ---  Module Name: bfpfemale
 -----------------------------------------------------------*/
 `timescale 1 ns/1 ns
+`include "../module_1/bmi.v"
 module bfpfemale(
 wf,
 hf,
@@ -26,7 +27,7 @@ bfprange);
   input [7:0] wf;
   input [7:0] hf;
   input [7:0] af;
-  output [7:0] rangef;
+  output [7:0] bfprange;
 	reg [23:0] result;
 	
 wire [7:0] bmi;

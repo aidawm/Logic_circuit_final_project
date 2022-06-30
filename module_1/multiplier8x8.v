@@ -23,6 +23,7 @@ module multiplier8x8(
 	input [7:0] B ,
 	output reg[15:0] result
     );
+	 
 	 reg [7:0] multiplicand;
 	 reg [7:0] multiplier;
 	 integer i;

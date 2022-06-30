@@ -18,6 +18,7 @@
 ---  Module Name: bmi
 -----------------------------------------------------------*/
 `include "../module_1/multiplier8x8.v"
+`include "../module_1/multiplier16x8.v"
 `timescale 1 ns/1 ns
 module bmi(
  enable,
