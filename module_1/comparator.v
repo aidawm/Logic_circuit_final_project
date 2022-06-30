@@ -18,6 +18,7 @@
 ---  Module Name: comparator 
 -----------------------------------------------------------*/
 `timescale 1 ns/1 ns
+`include "../module_1/comparator_8bit.v"
 module comparator(
  category,
  overweight,

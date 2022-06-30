@@ -15,14 +15,18 @@
 --*/
 
 /*-----------------------------------------------------------
----  Module Name: bfp
+---  Module Name: smart_scales_system
 -----------------------------------------------------------*/
 `timescale 1 ns/1 ns
-`include "../module_2/multiplexer2x1.v"
-`include "../module_2/bfpfemale.v"
-`include "../module_2/bfpmale.v"
 
-module bfp(
+`include "../module_1/bmi_module.v"
+`include "../module_2/bfp.v"
+`include "../module_2/type_of_body.v"
+`include "../module_3/bmd.v"
+
+module smart_scales_system(
+weight,
+height,
 wf,
 hf,
 af,
@@ -30,30 +34,32 @@ wm,
 hm,
 am,
 s,
-bfprange);
-  input [7:0] wf;
-  input [7:0] hf;
-  input [7:0] af;
-  input [7:0] wm;
-  input [7:0] hm;
-  input [7:0] am;
-  input s;
-  output reg [7:0] bfprange;
+range,
+overweight,
+normal_bmi,
+underweight,
+bmdrange,
+normal,
+abnormal);
+input [7:0] height;
+input [8:0] weight;
+input [2:0] bmdrange;
+input [7:0] wf;
+input [7:0] hf;
+input [7:0] af;
+input [7:0] wm;
+input [7:0] hm;
+input [7:0] am;
+input s;
+output [7:0] range;
+output overweight;
+output normal_bmi;
+output underweight;
+output normal;
+output abnormal;
 
-wire [7:0] femaleRange ;
-wire [7:0] maleRange;
-wire [7:0] muxResult;
-bfpfemale female(wf,hf,af,femaleRange);
-bfpmale male(wm,hm,am,maleRange);
+bmi_module bmi_calc(weight,height,overweight,normal_bmi,underweight);
+bfp bfp_calc (wf,hf,af,wm,hm,am,s,range);
+bmd bmd_calc (bmdrange,normal,abnormal);
 
-/*initial 
-	begin 
-		$monitor ("%male = %b , female = %b",bfprange,femaleRange);
-	end*/
-multiplexer2x1 mux(femaleRange,maleRange,s,muxResult);
-
-always @ (muxResult)
-	bfprange = muxResult; 
-	
-	
 endmodule

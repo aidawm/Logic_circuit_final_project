@@ -18,6 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
+`include "../module_1/comparator_1bit.v"
 module comparator_8bit(
 input [7:0]A,
 input [7:0]B,

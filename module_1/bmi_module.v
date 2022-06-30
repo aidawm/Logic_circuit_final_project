@@ -17,6 +17,10 @@
 /*-----------------------------------------------------------
 ---  Module Name: bmi_module
 -----------------------------------------------------------*/
+`include "../module_1/parityErrorChecker.v"
+`include "../module_1/bmi.v"
+`include "../module_1/comparator.v"
+
 `timescale 1 ns/1 ns
 module bmi_module(
  weight,
