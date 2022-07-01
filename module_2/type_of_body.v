@@ -22,7 +22,8 @@ module type_of_body(
 input [2:0] code,
 output reg type
     );
-
+initial 
+	$monitor ("%b %b",code,type);
 always @ (code)
 	if(code==3'b111 | code==3'b000)
 		type = 1'b1;

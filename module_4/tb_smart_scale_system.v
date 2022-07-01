@@ -35,7 +35,8 @@ module tb_smart_scale_system;
 	reg [7:0] am;
 	reg s;
 	reg [2:0] bmdrange;
-
+	reg [2:0]code_tob;
+	
 	// Outputs
 	wire [7:0] range;
 	wire overweight;
@@ -43,6 +44,7 @@ module tb_smart_scale_system;
 	wire underweight;
 	wire normal;
 	wire abnormal;
+	wire type_tob;
 
 	// Instantiate the Unit Under Test (UUT)
 	smart_scales_system uut (
@@ -55,13 +57,15 @@ module tb_smart_scale_system;
 		.hm(hm), 
 		.am(am), 
 		.s(s), 
+		.code_tob(code_tob),
 		.range(range), 
 		.overweight(overweight), 
 		.normal_bmi(normal_bmi), 
 		.underweight(underweight), 
 		.bmdrange(bmdrange), 
 		.normal(normal), 
-		.abnormal(abnormal)
+		.abnormal(abnormal),
+		.type_tob(type_tob)
 	);
 
 	initial begin
@@ -76,6 +80,8 @@ module tb_smart_scale_system;
 		am = 8'b00011110;
 		s = 0;
 		bmdrange = 3'b111;
+		
+		code_tob = 3'b111;
 
 		// Wait 100 ns for global reset to finish
 		#100;

@@ -34,13 +34,15 @@ wm,
 hm,
 am,
 s,
+code_tob,
 range,
 overweight,
 normal_bmi,
 underweight,
 bmdrange,
 normal,
-abnormal);
+abnormal,
+type_tob);
 input [7:0] height;
 input [8:0] weight;
 input [2:0] bmdrange;
@@ -51,15 +53,21 @@ input [7:0] wm;
 input [7:0] hm;
 input [7:0] am;
 input s;
+input [2:0] code_tob;
+
 output [7:0] range;
 output overweight;
 output normal_bmi;
 output underweight;
 output normal;
 output abnormal;
+output type_tob;
+
 
 bmi_module bmi_calc(weight,height,overweight,normal_bmi,underweight);
 bfp bfp_calc (wf,hf,af,wm,hm,am,s,range);
 bmd bmd_calc (bmdrange,normal,abnormal);
+type_of_body tob(code_tob,type_tob);
+
 
 endmodule
